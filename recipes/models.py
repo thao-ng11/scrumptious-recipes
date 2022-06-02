@@ -1,6 +1,8 @@
 from django.db import models
 
 # One
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=125)
     author = models.CharField(max_length=100)
@@ -19,8 +21,6 @@ class Recipe(models.Model):
 class Step(models.Model):
     recipe = models.ForeignKey(
         "Recipe",
-        blank=True,
-        null=True,
         related_name="steps",
         on_delete=models.CASCADE,
     )
@@ -28,7 +28,7 @@ class Step(models.Model):
     directions = models.TextField(max_length=300)
 
     def __str__(self):
-        return self.recipe + self.order + self.directions
+        return f"{self. recipe} Step  {self.order}"
 
 
 class Measure(models.Model):
@@ -37,7 +37,7 @@ class Measure(models.Model):
     abbreviation = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
-        return self.name + " " + self.abbreviation
+        return self.abbreviation
 
 
 class FoodItem(models.Model):
@@ -48,7 +48,7 @@ class FoodItem(models.Model):
 
 
 class Ingredient(models.Model):
-    amount = models.FloatField
+    amount = models.FloatField()
     recipe = models.ForeignKey(
         "Recipe",
         related_name="ingredients",
@@ -64,12 +64,4 @@ class Ingredient(models.Model):
     )
 
     def __str__(self):
-        return (
-            self.amount
-            + " "
-            + self.recipe
-            + " "
-            + self.measure
-            + " "
-            + self.food
-        )
+        return f"{self. measure} {self.food}"
