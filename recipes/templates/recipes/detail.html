@@ -28,10 +28,10 @@
     </nav>
   </header>
   <main class="recipe-detail">
+    <h1>{{ recipe.name }}</h1>
     {% if recipe.image %}
       <img src="{{ recipe.image }}" class="pull-right">
     {% endif %}
-    <h1>{{ recipe.name }}</h1>
     <p>
       Created on {{ recipe.created }} |
       Updated on {{ recipe.updated }}

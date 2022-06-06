@@ -37,7 +37,7 @@ class Measure(models.Model):
     abbreviation = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
-        return self.abbreviation
+        return f"{self.abbreviation}"
 
 
 class FoodItem(models.Model):
@@ -48,7 +48,7 @@ class FoodItem(models.Model):
 
 
 class Ingredient(models.Model):
-    amount = models.FloatField()
+    amount = models.FloatField(validators=[MaxValueValidator(20)])
     recipe = models.ForeignKey(
         "Recipe",
         related_name="ingredients",
@@ -64,4 +64,4 @@ class Ingredient(models.Model):
     )
 
     def __str__(self):
-        return f"{self. measure} {self.food}"
+        return f"{self.amount} {self. measure} {self.food}"
